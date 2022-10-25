@@ -12,7 +12,8 @@ import androidx.core.content.ContextCompat;
 public class DrawingView extends View {
 
     private final Paint paint = new Paint();
-    
+
+    private final Paint lighter;
     private final Paint light;
     private final Paint green;
     private final Paint darkGreen;
@@ -27,6 +28,7 @@ public class DrawingView extends View {
     private final int greenColor;
     private final int darkGreenColor;
     private final int treeColor;
+    private final int lighterGreenColor;
     private final int purple_200Color;
 
     public DrawingView(Context context) {
@@ -37,10 +39,16 @@ public class DrawingView extends View {
         greenColor = ContextCompat.getColor(context, R.color.green);
         darkGreenColor = ContextCompat.getColor(context, R.color.dark_green);
         treeColor = ContextCompat.getColor(context, R.color.tree);
+        lighterGreenColor = ContextCompat.getColor(context, R.color.lighter_green);
         purple_200Color = ContextCompat.getColor(context, R.color.purple_200);
 
         rectfLeft = new RectF(200,1200,550,1250);
         rectfRight = new RectF(550,1200,800,1250);
+
+        lighter = new Paint();
+        lighter.setAntiAlias(true);
+        lighter.setColor(lighterGreenColor);
+        lighter.setStyle(Paint.Style.FILL);
 
         light = new Paint();
         light.setAntiAlias(true);
@@ -70,18 +78,13 @@ public class DrawingView extends View {
         paint.setColor(purple_200Color);
         paint.setTextSize(70);
         paint.setAntiAlias(true);
-        canvas.drawColor(snowBlueColor);
 
-        //canvas.drawRect(300, 1300, 800, 1800, boxPaint);
-
-        //canvas.drawRect(280, 1250, 820, 1350, boxCapPaint);
         canvas.drawRect(450, 1250, 600, 1800, tree);
-        drawTriangle(canvas, darkGreen,520, 1500, 500);
-        drawTriangle(canvas, darkGreen,520, 1500, 500);
-        drawTriangle(canvas, darkGreen,520, 1500, 500);
 
-        canvas.drawArc(rectfLeft,0,360,false, tree);
-        canvas.drawArc(rectfRight,0,360,false, tree);
+        drawTriangle(canvas, darkGreen,520, 1500, 500);
+        drawTriangle(canvas, green,520, 1400, 500);
+        drawTriangle(canvas, light,520, 1300, 480);
+        drawTriangle(canvas, lighter,520, 1200, 400);
 
         canvas.drawText("C Наступающим Новым Годом!", 35, 300, paint);
     }
